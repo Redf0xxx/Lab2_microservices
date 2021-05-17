@@ -37,14 +37,13 @@ def post_request():
         "msg": request.json.get('msg')
     }
     post_log_response = requests.post(
-        f'{a}/logging-service',
+        f'{get_rand_logging_client()}/logging-service',
         json=post_log_request
     )
     status = post_log_response.status_code
     print('received status from logging:', status)
     return app.response_class(status=status)
 
-a=get_rand_logging_client()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8082, debug=True)
